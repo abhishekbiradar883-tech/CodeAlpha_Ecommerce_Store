@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeAlpha E-Commerce Store</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+    <h2>CodeAlpha Store</h2>
+
+    <input type="text" id="search"
+           placeholder="Search products...">
+
+    <a href="/">Home</a>
+    <a href="#products">Products</a>
+    <a href="#cart">My Cart</a>
+</nav>
+
+    <h1>Welcome to CodeAlpha E-Commerce Store</h1>
+
+    <p>Your one-stop shop for amazing products!</p>
+
+    <h2>Our Products</h2>
+
+    
+<div class="product-card">
+    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
+         alt="Smart Watch">
+    <h3>Smart Watch</h3>
+    <p>Price: ₹1,999</p>
+    <button onclick="addToCart('Smart Watch', 1999)">Add to Cart</button>
+</div>
+
+
+    
+<div class="product-card">
+    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
+         alt="Headphones">
+    <h3>Headphones</h3>
+    <p>Price: ₹999</p>
+    <button onclick="addToCart('Headphones', 999)">Add to Cart</button>
+</div>
+
+
+    
+<div class="product-card">
+    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
+         alt="Smart Phone">
+    <h3>Smart Phone</h3>
+    <p>Price: ₹12,999</p>
+    <button onclick="addToCart('Smart Phone', 12999)">Add to Cart</button>
+</div>
+
+
+    <h2>Shopping Cart (<span id="cart-count">0</span>)</h2>
+
+    <div id="cart-items"></div>
+
+    <h3>Total: ₹<span id="total">0</span></h3>
+    <button onclick="checkout()">Proceed to Checkout</button>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+
+</body>
+</html>
