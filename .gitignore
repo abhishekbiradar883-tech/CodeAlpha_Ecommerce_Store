@@ -1,4 +1,30 @@
-venv/
+
+# Python cache files
 __pycache__/
-*.pyc
-store.db
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Django database
+db.sqlite3
+*.sqlite3
+
+# Environment variables and secrets
+.env
+
+# Django collected static files
+staticfiles/
+
+# IDE files
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+# Old Flask project files
+/login.html
+/store.db

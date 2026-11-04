@@ -1,25 +1,77 @@
 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>My Orders</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders - CodeAlpha Store</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
+
+    <nav class="navbar">
+        <h2>CodeAlpha Store</h2>
+        <a href="/">Home</a>
+        <a href="/#products">Products</a>
+        <a href="/#cart">My Cart</a>
+        <a href="/logout/">Logout</a>
+    </nav>
 
     <h1>My Order History</h1>
 
-    {% for order in orders %}
-    <div class="product-card">
-        <h3>Order #{{ order[0] }}</h3>
-        <p>Products: {{ order[1] }}</p>
-        <h3>Total: ₹{{ order[2] }}</h3>
-    </div>
-    {% else %}
-    <p>No orders found.</p>
-    {% endfor %}
+    <p>View all your previous orders below.</p>
 
-    <a href="/">Back to Home</a>
+    <div class="products-container">
+
+        {% for order in orders %}
+
+            <div class="product-card">
+
+                <h2>Order #{{ order.id }}</h2>
+
+                <hr>
+
+                <h3>Order Details</h3>
+
+                <p>
+                    <strong>Products:</strong><br>
+                    {{ order.products }}
+                </p>
+
+                <h3>
+                    Total: ₹{{ order.total_price }}
+                </h3>
+
+                <p>
+                    <strong>Order Date:</strong><br>
+                    {{ order.created_at|date:"d M Y, h:i A" }}
+                </p>
+
+                <p style="color: green; font-weight: bold;">
+                    Order Placed Successfully
+                </p>
+
+            </div>
+
+        {% empty %}
+
+            <div class="product-card">
+                <h2>No Orders Yet!</h2>
+                <p>You haven't placed any orders.</p>
+                <a href="/">Start Shopping</a>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <br>
+
+    <a href="/">← Back to Home</a>
 
 </body>
 </html>

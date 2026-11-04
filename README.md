@@ -1,43 +1,47 @@
 # CodeAlpha E-Commerce Store
 
-## Project Description
-A simple e-commerce web application developed as part of the CodeAlpha Full Stack Development Internship. The application allows users to browse products, search for products, add items to a shopping cart, place orders and view their order history.
+## 1. Project Overview
 
-## Features
-- User registration and login
-- Secure password hashing
-- Product listing with images
-- Individual product details pages
-- Product search functionality
-- Add products to shopping cart
-- Remove products from shopping cart
-- Automatic total price calculation
-- Checkout and order placement
-- SQLite database integration
-- User-specific order history
-- Logout functionality
+The **CodeAlpha E-Commerce Store** is a full-stack web application developed using Python Django, HTML, CSS, JavaScript, and SQLite.
 
-## Technologies Used
-- Python
-- Flask
-- HTML5
-- CSS3
-- JavaScript
-- SQLite
-- Werkzeug
+The application allows users to browse products, view product details, add products to a shopping cart, register, log in, and place orders.
 
-## Project Structure
+## 2. Technologies Used
+
+- **Frontend:** HTML, CSS, JavaScript
+- **Backend:** Python Django
+- **Database:** SQLite
+- **Development Environment:** Visual Studio Code
+- **Version Control:** Git and GitHub
+
+## 3. Main Features
+
+1. **User Registration:** New users can create an account.
+2. **User Login:** Registered users can securely log in.
+3. **Product Listing:** Users can browse available products.
+4. **Product Details:** Users can view product descriptions, images, and prices.
+5. **Shopping Cart:** Users can add and remove products and view the total price.
+6. **Order Processing:** Logged-in users can place orders.
+7. **Order History:** Users can view their previous orders.
+8. **Product Management:** Administrators can manage products through Django Admin.
+9. **Product Search:** Users can search for products.
+
+## 4. Project Structure
+
 ```text
 CodeAlpha_Ecommerce_Store/
 │
-├── app.py
-├── requirements.txt
-├── README.md
-├── .gitignore
+├── ecommerce_config/
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
 │
-├── static/
-│   ├── style.css
-│   └── script.js
+├── store/
+│   ├── migrations/
+│   ├── models.py
+│   ├── views.py
+│   ├── urls.py
+│   └── admin.py
 │
 ├── templates/
 │   ├── index.html
@@ -46,59 +50,108 @@ CodeAlpha_Ecommerce_Store/
 │   ├── product.html
 │   └── orders.html
 │
-└── venv/
+├── static/
+│   ├── style.css
+│   └── script.js
+│
+├── manage.py
+├── requirements.txt
+├── README.md
+└── db.sqlite3
 ```
 
-## Installation and Setup
+## 5. Installation and Setup
 
-1. Clone the repository:
+### Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/abhishekbiradar883-tech/CodeAlpha_Ecommerce_Store.git
 ```
 
-2. Open the project folder:
+### Step 2: Open the Project Folder
 
 ```bash
 cd CodeAlpha_Ecommerce_Store
 ```
 
-3. Create a virtual environment:
+### Step 3: Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-4. Activate the virtual environment on Windows:
+### Step 4: Activate the Virtual Environment
+
+For Windows PowerShell:
 
 ```bash
-venv\Scripts\activate
+venv\Scripts\Activate
 ```
 
-5. Install the required dependencies:
+### Step 5: Install Django
 
 ```bash
-pip install -r requirements.txt
+pip install Django==6.1.2
 ```
 
-6. Run the application:
+### Step 6: Apply Database Migrations
 
 ```bash
-python app.py
+python manage.py migrate
 ```
 
-7. Open your browser and visit:
+### Step 7: Create an Admin Account
 
-http://127.0.0.1:5000/
+```bash
+python manage.py createsuperuser
+```
 
-## Database
+### Step 8: Run the Development Server
+
+```bash
+python manage.py runserver
+```
+
+Open the following URL in your browser:
+
+http://127.0.0.1:8000/
+
+## 6. Django Admin Panel
+
+Administrators can manage products and view customer orders using the Django Admin Panel.
+
+URL:
+
+http://127.0.0.1:8000/admin/
+
+Log in using the superuser credentials created during setup.
+
+## 7. Database
+
 The application uses SQLite to store:
-- User information
-- Product details
-- Customer orders
 
-## Developed For
-CodeAlpha Full Stack Development Internship
+- Product information
+- User account information
+- Customer order information
 
-## GitHub Repository
-https://github.com/abhishekbiradar883-tech/CodeAlpha_Ecommerce_Store
+## 8. Future Enhancements
+
+- Online payment gateway integration
+- Product reviews and ratings
+- Order tracking
+- Wishlist functionality
+- Improved security and deployment
+
+## 9. Internship Project
+
+**Internship Organization:** CodeAlpha
+
+**Task:** Task 1 – Simple E-Commerce Store
+
+**Project Type:** Full Stack Web Development
+
+**Developer:** Abhishek Biradar
+
+## 10. Conclusion
+
+This project demonstrates the development of a full-stack e-commerce application using Django. It provides essential online shopping functionalities, including user authentication, product management, shopping cart operations, and order processing.

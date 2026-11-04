@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,111 +7,79 @@
 
     <title>CodeAlpha E-Commerce Store</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 
 <body>
 
     <!-- Navigation Bar -->
     <nav class="navbar">
-
         <h2>CodeAlpha Store</h2>
 
-        <input type="text"
-               id="search"
-               placeholder="Search products...">
+        <input type="text" id="search" placeholder="Search products...">
 
         <a href="/">Home</a>
         <a href="#products">Products</a>
         <a href="#cart">My Cart</a>
 
-        {% if session.get('user_id') %}
-
-            <span>Welcome, {{ session.get('username') }}</span>
-
-            <a href="/orders">My Orders</a>
-            <a href="/logout">Logout</a>
-
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}</span>
+            <a href="/orders/">My Orders</a>
+            <a href="/logout/">Logout</a>
         {% else %}
-
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-
+            <a href="/login/">Login</a>
+            <a href="/register/">Register</a>
         {% endif %}
-
     </nav>
 
-
-    <!-- Homepage Heading -->
+    <!-- Main Heading -->
     <h1>Welcome to CodeAlpha E-Commerce Store</h1>
 
     <p>Your one-stop shop for amazing products!</p>
 
-
     <!-- Products Section -->
     <h2 id="products">Our Products</h2>
 
+    <div class="products-container">
 
-    <!-- Product 1: Smart Watch -->
-    <div class="product-card">
+        {% for product in products %}
 
-        <img
-            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400"
-            alt="Smart Watch">
+            <div class="product-card">
 
-        <h3>Smart Watch</h3>
+                {% if product.image %}
+                    <img src="{{ product.image }}" alt="{{ product.name }}">
+                {% endif %}
 
-        <p>Price: ₹1,999</p>
+                <h3>{{ product.name }}</h3>
 
-        <a href="/product/1">View Details</a>
+                <p>{{ product.description }}</p>
 
-        <button onclick="addToCart('Smart Watch', 1999)">
-            Add to Cart
-        </button>
+                <h3>Price: ₹{{ product.price }}</h3>
 
-    </div>
+                <a href="{% url 'product_detail' product.pk %}">
+                    View Details
+                </a>
 
+                <br><br>
 
-    <!-- Product 2: Headphones -->
-    <div class="product-card">
+                <button type="button"
+                    onclick="addToCart(
+                        {{ product.id }},
+                        '{{ product.name|escapejs }}',
+                        {{ product.price }}
+                    )">
+                    Add to Cart
+                </button>
 
-        <img
-            src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400"
-            alt="Headphones">
+            </div>
 
-        <h3>Headphones</h3>
+        {% empty %}
 
-        <p>Price: ₹999</p>
+            <p>No products available.</p>
 
-        <a href="/product/2">View Details</a>
-
-        <button onclick="addToCart('Headphones', 999)">
-            Add to Cart
-        </button>
-
-    </div>
-
-
-    <!-- Product 3: Smart Phone -->
-    <div class="product-card">
-
-        <img
-            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400"
-            alt="Smart Phone">
-
-        <h3>Smart Phone</h3>
-
-        <p>Price: ₹12,999</p>
-
-        <a href="/product/3">View Details</a>
-
-        <button onclick="addToCart('Smart Phone', 12999)">
-            Add to Cart
-        </button>
+        {% endfor %}
 
     </div>
-
 
     <!-- Shopping Cart Section -->
     <h2 id="cart">
@@ -121,16 +89,15 @@
     <div id="cart-items"></div>
 
     <h3>
-        Total: ₹<span id="total">0</span>
+        Total: ₹<span id="total">0.00</span>
     </h3>
 
-    <button onclick="checkout()">
+    <button type="button" onclick="checkout()">
         Proceed to Checkout
     </button>
 
-
     <!-- JavaScript -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{% static 'script.js' %}"></script>
 
 </body>
 </html>

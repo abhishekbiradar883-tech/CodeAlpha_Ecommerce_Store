@@ -1,21 +1,69 @@
+
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Product Details</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ product.name }} - CodeAlpha Store</title>
+
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
+
 <body>
+
+    <nav class="navbar">
+        <h2>CodeAlpha Store</h2>
+        <a href="/">Home</a>
+        <a href="/#products">Products</a>
+        <a href="/#cart">My Cart</a>
+    </nav>
 
     <h1>Product Details</h1>
 
-    <div class="product-card">
-        <img src="{{ product[4] }}" alt="{{ product[1] }}">
-        <h2>{{ product[1] }}</h2>
-        <p>{{ product[2] }}</p>
-        <h3>Price: ₹{{ product[3] }}</h3>
+    <div class="product-details-container">
 
-        <a href="/">Back to Store</a>
+        <div class="product-details-card">
+
+            {% if product.image %}
+                <img
+                    src="{{ product.image }}"
+                    alt="{{ product.name }}"
+                >
+            {% endif %}
+
+            <div class="product-details-info">
+
+                <h2>{{ product.name }}</h2>
+
+                <p>{{ product.description }}</p>
+
+                <h2 class="product-price">
+                    ₹{{ product.price }}
+                </h2>
+
+                <button
+                    type="button"
+                    onclick="addToCart(
+                        {{ product.id }},
+                        '{{ product.name|escapejs }}',
+                        {{ product.price }}
+                    )">
+                    Add to Cart
+                </button>
+
+                <br><br>
+
+                <a href="/">← Continue Shopping</a>
+
+            </div>
+
+        </div>
+
     </div>
+
+    <script src="{% static 'script.js' %}"></script>
 
 </body>
 </html>
